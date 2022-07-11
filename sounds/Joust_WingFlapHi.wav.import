@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Joust_WingFlapHi.wav-29989183ed3d8f3c3fcb583b8f4a81e7.sample"
+
+[deps]
+
+source_file="res://sounds/Joust_WingFlapHi.wav"
+dest_files=[ "res://.import/Joust_WingFlapHi.wav-29989183ed3d8f3c3fcb583b8f4a81e7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

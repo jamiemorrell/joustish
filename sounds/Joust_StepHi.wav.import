@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Joust_StepHi.wav-c536ea2474225e1b81f3b8086295d0fa.sample"
+
+[deps]
+
+source_file="res://sounds/Joust_StepHi.wav"
+dest_files=[ "res://.import/Joust_StepHi.wav-c536ea2474225e1b81f3b8086295d0fa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,133 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://sprites/bounder_standing.png" type="Texture" id=1]
+[ext_resource path="res://sprites/hunter_standing.png" type="Texture" id=2]
+[ext_resource path="res://sprites/shadowlord_standing.png" type="Texture" id=3]
+[ext_resource path="res://StandingRider.gd" type="Script" id=4]
+[ext_resource path="res://sprites/hatching_egg.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("EggHatch:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("EggHatch:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Rider:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "hatch"
+tracks/0/type = "value"
+tracks/0/path = NodePath("EggHatch:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("EggHatch:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Rider:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 13.0
+height = 12.0
+
+[node name="StandingRider" type="Area2D" groups=["enemy", "standingrider"]]
+collision_layer = 32
+collision_mask = 10
+script = ExtResource( 4 )
+
+[node name="Rider" type="Node2D" parent="."]
+position = Vector2( 1, -18 )
+scale = Vector2( 3, 3 )
+
+[node name="Hunter" type="Sprite" parent="Rider"]
+texture = ExtResource( 2 )
+
+[node name="Bounder" type="Sprite" parent="Rider"]
+texture = ExtResource( 1 )
+
+[node name="ShadowLord" type="Sprite" parent="Rider"]
+visible = false
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/hatch = SubResource( 3 )
+
+[node name="RiderCollider" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -16 )
+shape = SubResource( 1 )
+
+[node name="RemountTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="EggHatch" type="Sprite" parent="."]
+visible = false
+position = Vector2( 2, -18 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+hframes = 3
+
+[node name="PointsPosition" type="Position2D" parent="."]
+position = Vector2( 1, -25 )
+
+[connection signal="body_entered" from="." to="." method="_on_StandingRider_body_entered"]
+[connection signal="timeout" from="RemountTimer" to="." method="_on_RemountTimer_timeout"]
